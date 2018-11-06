@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
+        @Override //https://www.youtube.com/watch?v=ruPRpiJNJrU
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d(TAG, "onSensorChanged: X: " + event.values[0] + " Y: " + event.values[1] + " Z: " + event.values[2]);
     }
 
-    private void sendData(String data){
+    private void sendData(String data){ //http://camposha.info/source/android-data-passing-activity-fragment-via-bundle
         //Pack Data in Bundle
         Bundle bundle = new Bundle();
         bundle.putString("xAcc", xAcc);
