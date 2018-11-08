@@ -49,21 +49,18 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override //https://www.youtube.com/watch?v=ruPRpiJNJrU
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
-
             switch (item.getItemId()){
                 case R.id.nav_1:
                     AccelerationFragment accelerationFragment = new AccelerationFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,accelerationFragment, null).commit();
                     break;
                 case R.id.nav_2:
+                    MagnetometerFragment magnetometerFragment = new MagnetometerFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,magnetometerFragment, null).commit();
                     break;
                 case R.id.nav_3:
                     break;
             }
-
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, selectedFragment).commit();
-
             return true;
         }
     };
