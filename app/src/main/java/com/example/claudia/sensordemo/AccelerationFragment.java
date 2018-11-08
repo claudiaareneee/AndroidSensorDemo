@@ -3,6 +3,10 @@ package com.example.claudia.sensordemo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,9 +18,13 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccelerationFragment extends Fragment {
+public class AccelerationFragment extends Fragment implements SensorEventListener{
 
-    private TextView acceleration;
+    private TextView xAccTextView, yAccTextView, zAccTextView;
+    private String xAcc, yAcc, zAcc;
+
+    private SensorManager mSensorManager;
+    Sensor accelerometer;
 
     public AccelerationFragment() {
         // Required empty public constructor
@@ -29,17 +37,31 @@ public class AccelerationFragment extends Fragment {
 
         //Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_acceleration, container, false);
-        acceleration = view.findViewById(R.id.acceleration);
+        xAccTextView = view.findViewById(R.id.xAcceleration);
+        yAccTextView = view.findViewById(R.id.yAcceleration);
+        zAccTextView = view.findViewById(R.id.zAcceleration);
 
-        //Unpack bundle
-        try {
-            String acc = this.getArguments().getString("xAcc");
-            acceleration.setText(acc);
+        mSensorManager = (SensorManager)this.getActivity().getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
-        } catch (java.lang.NullPointerException e){
-            System.out.println("ERROR. UHOH");
-        }
 
         return view;
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        xAcc = String.valueOf(event.values[0]);
+        yAcc = String.valueOf(event.values[1]);
+        zAcc = String.valueOf(event.values[2]);
+
+        xAccTextView.setText("x acceleration: " + xAcc);
+        yAccTextView.setText("y acceleration: " + yAcc);
+        zAccTextView.setText("z acceleration: " + zAcc);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        //Do something
     }
 }
