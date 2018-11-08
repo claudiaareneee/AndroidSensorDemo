@@ -50,6 +50,19 @@ public class AccelerationFragment extends Fragment implements SensorEventListene
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
+
+    }
+
+    @Override
     public void onSensorChanged(SensorEvent event) {
         xAcc = String.valueOf(event.values[0]);
         yAcc = String.valueOf(event.values[1]);

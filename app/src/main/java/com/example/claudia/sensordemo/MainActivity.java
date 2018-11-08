@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,magnetometerFragment, null).commit();
                     break;
                 case R.id.nav_3:
+                    OrientationFragment orientationFragment = new OrientationFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,orientationFragment, null).commit();
                     break;
             }
             return true;

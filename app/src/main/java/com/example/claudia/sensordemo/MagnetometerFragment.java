@@ -25,7 +25,7 @@ public class MagnetometerFragment extends Fragment implements SensorEventListene
     private String xMag, yMag, zMag;
 
     private SensorManager mSensorManager;
-    Sensor accelerometer;
+    Sensor magnetometer;
 
     public MagnetometerFragment() {
         // Required empty public constructor
@@ -36,8 +36,8 @@ public class MagnetometerFragment extends Fragment implements SensorEventListene
         super.onCreate(savedInstanceState);
 
         mSensorManager = (SensorManager)this.getActivity().getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        magnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        mSensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
@@ -52,6 +52,19 @@ public class MagnetometerFragment extends Fragment implements SensorEventListene
         zMagTextView = view.findViewById(R.id.zMagnetometer);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
+
     }
 
     @Override
