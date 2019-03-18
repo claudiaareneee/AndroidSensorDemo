@@ -79,8 +79,8 @@ public class OrientationFragment extends Fragment implements SensorEventListener
                 float orientation[] = new float[3];
                 SensorManager.getOrientation(R, orientation);
                 float azimuth = orientation[0];
-                float pitch = orientation[1];
-                float roll = orientation[2];
+                float pitch = orientation[2];
+                float roll = orientation[1];
 
                 zOri = String.format(Locale.US,"Azimuth: %.8f",azimuth);
                 xOri = String.format(Locale.US,"Roll:    %.8f",roll);
