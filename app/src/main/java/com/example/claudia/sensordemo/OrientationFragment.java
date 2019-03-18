@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,10 +38,10 @@ public class OrientationFragment extends Fragment implements SensorEventListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_acceleration, container, false);
-        xOriTextView = view.findViewById(R.id.xAcceleration);
-        yOriTextView = view.findViewById(R.id.yAcceleration);
-        zOriTextView = view.findViewById(R.id.zAcceleration);
+        View view = inflater.inflate(R.layout.fragment_orientation, container, false);
+        xOriTextView = view.findViewById(R.id.xOrientation);
+        yOriTextView = view.findViewById(R.id.yOrientation);
+        zOriTextView = view.findViewById(R.id.zOrientation);
 
         mSensorManager = (SensorManager)this.getActivity().getSystemService(Context.SENSOR_SERVICE);
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -76,20 +78,20 @@ public class OrientationFragment extends Fragment implements SensorEventListener
             if (success) {
                 float orientation[] = new float[3];
                 SensorManager.getOrientation(R, orientation);
-                float azimut = orientation[0];
+                float azimuth = orientation[0];
                 float pitch = orientation[1];
                 float roll = orientation[2];
 
-                zOri = String.valueOf(azimut);
-                xOri = String.valueOf(roll);
-                yOri = String.valueOf(pitch);
+                zOri = String.format(Locale.US,"Azimuth: %.8f",azimuth);
+                xOri = String.format(Locale.US,"Roll:    %.8f",roll);
+                yOri = String.format(Locale.US,"Pitch:   %.8f",pitch);
 
-                xOriTextView.setText("x orientation: " + xOri);
-                yOriTextView.setText("y orientation: " + yOri);
-                zOriTextView.setText("z orientation: " + zOri);
+                xOriTextView.setText(xOri);
+                yOriTextView.setText(yOri);
+                zOriTextView.setText(zOri);
 
 
-                // orientation contains: azimut, pitch and roll
+                // orientation contains: azimuth, pitch and roll
             }
         }
     }
