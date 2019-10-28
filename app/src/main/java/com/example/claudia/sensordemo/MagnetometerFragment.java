@@ -67,6 +67,10 @@ public class MagnetometerFragment extends Fragment implements SensorEventListene
 
     }
 
+    public void magnetometerDetails(View v) {
+        // does something very interesting
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         xMag = String.valueOf(event.values[0]);

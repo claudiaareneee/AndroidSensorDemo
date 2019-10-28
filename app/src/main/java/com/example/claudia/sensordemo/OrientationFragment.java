@@ -63,6 +63,10 @@ public class OrientationFragment extends Fragment implements SensorEventListener
 
     }
 
+    public void orientationDetails(View v) {
+        // does something very interesting
+    }
+
     float[] mGravity;
     float[] mGeomagnetic;
     @Override
