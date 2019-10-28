@@ -62,6 +62,10 @@ public class AccelerationFragment extends Fragment implements SensorEventListene
 
     }
 
+    public void accelerationDetails(View v) {
+        // does something very interesting
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         xAcc = String.valueOf(event.values[0]);
